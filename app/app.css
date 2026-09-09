@@ -1,0 +1,68 @@
+html body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  max-width: 864px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  background-color: #f7f8fa;
+  color: #1f2933;
+}
+
+body > h2 {
+  margin-bottom: 0.6rem;
+}
+
+body > hr {
+  margin-bottom: 1.25rem;
+  border-color: #d9dee7;
+}
+
+.eyebrow {
+  margin: 0 0 0.55rem;
+  color: #667085;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.fortune-card {
+  margin: 0 0 0.625rem;
+  padding: 1.25rem 1.4rem;
+  min-height: calc((1.05rem * 1.65 * 3) + 2.5rem);
+  background: #fff;
+  border: 1px solid #d9dee7;
+  border-left: 4px solid #4f7cac;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}
+
+.fortune-card p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.fortune-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+}
+
+.fortune-actions button {
+  font-weight: 650;
+  background: #4f7cac;
+  color: #fff;
+  margin: 0;
+}
+
+.webdyne-version {
+  color: #98a2b3;
+  font-size: 0.68rem;
+  font-style: normal;
+  line-height: 1;
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}

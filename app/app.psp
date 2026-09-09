@@ -1,0 +1,20 @@
+<start_html title="Your Fortune" h2 hr htmx style_append="app.css">
+
+<p class="eyebrow">Random Perl quote</p>
+
+<htmx force="1">
+<blockquote id="fortune" class="fortune-card">
+<p><perl require="app.pm" handler="fortune" chomp/></p>
+</blockquote>
+</htmx>
+
+<div class="fortune-actions">
+<button
+  type="button"
+  hx-get=""
+  hx-target="#fortune"
+  hx-swap="outerHTML">
+  Refresh
+</button>
+<small class="webdyne-version">WebDyne <? $WebDyne::VERSION ?>, Render Time: <? sprintf('%.2f ms', $_[0]->render_time() * 1000) ?></small>
+</div>
