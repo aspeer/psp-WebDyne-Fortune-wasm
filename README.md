@@ -12,8 +12,10 @@ browser. The shell uses hash navigation without iframes.
 
 ## Build and preview
 
-Use Node.js 22 or newer and npm. The initial build needs network access to
-install the application's Pure Perl CPAN dependencies.
+Use Node.js 22 or newer, npm, Perl and `cpanminus` (or Carton). For example,
+on Ubuntu install the Perl dependency tool with `sudo apt-get install cpanminus`.
+The initial build needs network access to install the application's Pure Perl
+CPAN dependencies. The workflow installs this prerequisite automatically.
 
 ```sh
 git clone https://github.com/aspeer/psp-WebDyne-Fortune-wasm-browser.git
