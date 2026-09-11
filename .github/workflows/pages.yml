@@ -33,8 +33,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y cpanminus
-      - name: Install dependencies
-        run: npm install --package-lock=false
+      - name: Initialize browser build
+        run: |
+          npm init -y
+          npm install @webdyne/webdyne-zeroperl-browser
+          npx --no-install webdyne-browser init
       - name: Build and publish gh-pages branch
         env:
           GH_TOKEN: ${{ github.token }}

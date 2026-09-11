@@ -10,7 +10,7 @@ VFS assets into `htdocs/`. GitHub Pages serves those static files; no server-sid
 Perl or Cloudflare account is required. Application source is downloaded to the
 browser. The shell uses hash navigation without iframes.
 
-## Build and preview
+## Build from scratch
 
 Use Node.js 22 or newer, npm, Perl and `cpanminus` (or Carton). For example,
 on Ubuntu install the Perl dependency tool with `sudo apt-get install cpanminus`.
@@ -20,7 +20,9 @@ CPAN dependencies. The workflow installs this prerequisite automatically.
 ```sh
 git clone https://github.com/aspeer/psp-WebDyne-Fortune-wasm-browser.git
 cd psp-WebDyne-Fortune-wasm-browser
-npm install
+npm init -y
+npm install @webdyne/webdyne-zeroperl-browser
+npx webdyne-browser init
 npm run build
 npm run dev
 ```
@@ -30,22 +32,28 @@ site is in `htdocs/`; serve it over HTTP locally or HTTPS when hosted, rather
 than opening `index.html` with a file URL. After the first successful load,
 the service worker supports offline refresh and reload.
 
-The app accepts `@webdyne/webdyne-zeroperl` versions matching `^1.0.9` and
-`@webdyne/webdyne-zeroperl-browser` versions matching `^0.1.0`. Lockfiles and
-CPAN snapshots are ignored, so fresh installs resolve compatible releases.
-To upgrade the installed runtime before rebuilding:
+This repository intentionally omits `package.json`. `npm init -y` creates it
+locally; installing the browser package (1.0.0 or newer) also installs the
+ZeroPerl runtime automatically.
+`npx webdyne-browser init` adds the `build`, `dev` and `gh-pages` npm targets
+and the default configuration for `app/app.psp`, with output in `htdocs/`.
+
+The generated `package.json`, npm lockfile and CPAN snapshot are ignored by
+Git. Fresh installs use the current published browser package.
+Optionally add `--save-dev` to the install command to classify it as a build
+dependency; this does not change how the build works.
+After setup, use `npm run build` to rebuild following application changes;
+you do not need to repeat initialization. To update installed dependencies:
 
 ```sh
-npm install @webdyne/webdyne-zeroperl@^1.0.9
+npm update
 npm run build
 ```
 
-Commit `package.json` changes when changing the supported dependency versions.
-
 ## Publish to GitHub Pages
 
-Every push to `main` runs `.github/workflows/pages.yml`: it installs dependencies,
-builds the app, updates the `gh-pages` branch and deploys the same output to
+Every push to `main` runs `.github/workflows/pages.yml`: it creates the local npm project
+using the same initialization commands above, installs dependencies, builds the app, updates the `gh-pages` branch and deploys the same output to
 GitHub Pages. You can also run the workflow manually from the Actions tab.
 No additional token secret is required.
 
@@ -72,19 +80,19 @@ The build supports repository subpaths without editing a base URL.
 
 ## Add browser builds to another WebDyne app
 
-Starting with an `app/app.psp` file and an npm project:
+Starting in a directory containing `app/app.psp`:
 
 ```sh
-npm install @webdyne/webdyne-zeroperl@^1.0.9
-npm install --save-dev @webdyne/webdyne-zeroperl-browser@^0.1.0
+npm init -y
+npm install @webdyne/webdyne-zeroperl-browser
 npx webdyne-browser init
 npm run build
 ```
 
 Declare any additional Pure Perl dependencies in `cpanfile`.
-`init` creates the `build`, `dev` and `gh-pages` npm targets. Existing
-Cloudflare build and dev targets are retained as `build:cloudflare` and
-`dev:cloudflare` in this repository.
+`init` creates the `build`, `dev` and `gh-pages` npm targets. If adding this
+to an existing npm project, skip `npm init -y`. Existing Cloudflare build and
+dev targets are preserved as `build:cloudflare` and `dev:cloudflare`.
 
 ## Verification
 
