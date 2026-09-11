@@ -48,7 +48,7 @@ npm run build
 npm run gh-pages
 ```
 
-The `gh-pages` target publishes `htdocs/`, including `.nojekyll`, to the
+The `gh-pages` target rebuilds and publishes `htdocs/`, including `.nojekyll`, to the
 `gh-pages` branch on `origin`. It preserves the source checkout and deployment
 history. GitHub Pages is configured to deploy from that branch's root.
 Allow GitHub's Pages deployment to finish before opening the live demo.
@@ -72,3 +72,11 @@ Declare any additional Pure Perl dependencies in `cpanfile`.
 `init` creates the `build`, `dev` and `gh-pages` npm targets. Existing
 Cloudflare build and dev targets are retained as `build:cloudflare` and
 `dev:cloudflare` in this repository.
+
+## Verification
+
+The local build and deployed GitHub Pages site both passed the Fortune
+Chromium integration suite: initial rendering, repeated random-quote refresh,
+full shell navigation, one HTMX request per refresh, offline refresh and
+reload, no external CDN requests, and no iframes or browser exceptions.
+The original `app/` files and `cpanfile` are unchanged from the source clone.
