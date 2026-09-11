@@ -16,5 +16,5 @@
   hx-swap="outerHTML">
   Refresh
 </button>
-<small class="webdyne-version">WebDyne <? $WebDyne::VERSION ?>, Render Time: <? sprintf('%.2f ms', $_[0]->render_time() * 1000) ?></small>
+<small class="webdyne-version">WebDyne <? $WebDyne::VERSION ?></small>
 </div>
