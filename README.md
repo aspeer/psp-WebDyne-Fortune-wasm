@@ -18,7 +18,7 @@ install the application's Pure Perl CPAN dependencies.
 ```sh
 git clone https://github.com/aspeer/psp-WebDyne-Fortune-wasm-browser.git
 cd psp-WebDyne-Fortune-wasm-browser
-npm ci
+npm install
 npm run build
 npm run dev
 ```
@@ -28,8 +28,9 @@ site is in `htdocs/`; serve it over HTTP locally or HTTPS when hosted, rather
 than opening `index.html` with a file URL. After the first successful load,
 the service worker supports offline refresh and reload.
 
-The app uses `@webdyne/webdyne-zeroperl` 1.0.9 and
-`@webdyne/webdyne-zeroperl-browser` 0.1.0 in the committed lockfile.
+The app accepts `@webdyne/webdyne-zeroperl` versions matching `^1.0.9` and
+`@webdyne/webdyne-zeroperl-browser` versions matching `^0.1.0`. Lockfiles and
+CPAN snapshots are ignored, so fresh installs resolve compatible releases.
 To upgrade the installed runtime before rebuilding:
 
 ```sh
@@ -37,11 +38,16 @@ npm install @webdyne/webdyne-zeroperl@^1.0.9
 npm run build
 ```
 
-Commit dependency and lockfile updates when upgrading.
+Commit `package.json` changes when changing the supported dependency versions.
 
 ## Publish to GitHub Pages
 
-With Git push access to this repository:
+Every push to `main` runs `.github/workflows/pages.yml`: it installs dependencies,
+builds the app, updates the `gh-pages` branch and deploys the same output to
+GitHub Pages. You can also run the workflow manually from the Actions tab.
+No additional token secret is required.
+
+For a manual deployment with Git push access to this repository:
 
 ```sh
 npm run build
@@ -50,11 +56,16 @@ npm run gh-pages
 
 The `gh-pages` target rebuilds and publishes `htdocs/`, including `.nojekyll`, to the
 `gh-pages` branch on `origin`. It preserves the source checkout and deployment
-history. GitHub Pages is configured to deploy from that branch's root.
-Allow GitHub's Pages deployment to finish before opening the live demo.
+history. The destination is resolved from `git remote get-url --push origin`;
+no repository name is embedded in the publishing target. A manual push to
+`gh-pages` triggers GitHub's standard branch-based Pages deployment.
+Allow the workflow to finish before opening the live demo.
 
 For a fork, set `origin` to your GitHub repository and enable Pages under
 Settings → Pages → Deploy from a branch → `gh-pages` → `/ (root)`.
+Enable Actions in the fork too.
+If the `github-pages` environment restricts deployment branches, allow both
+`main` and `gh-pages`.
 The build supports repository subpaths without editing a base URL.
 
 ## Add browser builds to another WebDyne app
