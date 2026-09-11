@@ -1,0 +1,8 @@
+# carton snapshot format: version 1.0
+DISTRIBUTIONS
+  Fortune-0.2
+    pathname: G/GW/GWARD/Fortune-0.2.tar.gz
+    provides:
+      Fortune 0.2
+    requirements:
+      ExtUtils::MakeMaker 0
