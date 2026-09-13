@@ -36,8 +36,9 @@ jobs:
       - name: Initialize browser build
         run: |
           npm init -y
-          npm install @webdyne/webdyne-zeroperl-browser
+          npm install @webdyne/webdyne-zeroperl-browser @webdyne/webdyne-zeroperl
           npx --no-install webdyne-browser init
+          node scripts/configure-targets.mjs
       - name: Build and publish gh-pages branch
         env:
           GH_TOKEN: ${{ github.token }}

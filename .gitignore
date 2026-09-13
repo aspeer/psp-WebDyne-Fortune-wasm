@@ -1,6 +1,8 @@
 node_modules/
 .webdyne/
 .webdyne-local/
+.wrangler/
+.local-archives/
 htdocs/
 BACKLOG.md
 PLANS.md
